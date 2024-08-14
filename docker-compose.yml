@@ -1,0 +1,61 @@
+services:
+
+  app:
+    build:
+      args:
+        user: roni
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: app-image
+    container_name: app-container
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+    networks:
+      - ryds
+
+  db:
+    image : mysql
+    container_name : mysql
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    networks:
+      - ryds
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - "3400:80"
+    depends_on:
+      - db
+    networks:
+      - ryds
+
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-container
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - ryds
+
+networks:
+  ryds:
+    driver: bridge
