@@ -2,50 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\IHolidayService;
 use App\Models\Holiday;
+use App\Models\Participant;
+use Exception;
 use Illuminate\Http\Request;
 
 class HolidayController extends Controller
 {
+	protected $service;
+
+	public function __construct(IHolidayService $service)
+	{
+		$this->service = $service;
+	}
+
 	public function index()
 	{
-		return "All";
+		return $this->service->index();
 	}
 
 	public function store(Request $request)
 	{
-		$validatedData = $request->validate([
-			'title' => 'required|string|max:255',
-			'description' => 'nullable|string',
-			'date' => 'required|date',
-			'location' => 'nullable|string|max:255',
-			'participants' => 'nullable|array',
-			'participants.*.name' => 'required|string|max:255',
-		]);
-
-		$holiday = Holiday::create($validatedData);
-
-		if (!empty($validatedData['participants'])) {
-			foreach ($validatedData['participants'] as $participant) {
-				$holiday->participants()->create($participant);
-			}
-		}
-
-		return response()->json($holiday, 201);
+		return $this->service->store($request);
 	}
 
 	public function show(string $id)
 	{
-		return "Id: " . $id;
+		return $this->service->show($id);
 	}
 
 	public function update(Request $request, string $id)
 	{
-		return $request;
+		return $this->service->update($request, $id);
 	}
 
-	public function destroy(Holiday $holiday)
+	public function destroy(string $id)
 	{
-		return $holiday;
+		return $this->service->destroy($id);
 	}
 }
