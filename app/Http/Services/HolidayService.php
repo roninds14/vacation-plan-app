@@ -6,19 +6,17 @@ use App\Models\Holiday;
 use App\Models\Participant;
 use Exception;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\View;
 
 class HolidayService implements IHolidayService
 {
 	public function index()
 	{
-		$eagerHoliday = [];
-		$holidays[] = Holiday::all();
-
-		foreach ($holidays as $holiday) {
-			array_push($eagerHoliday, Holiday::with('participants')->find($holiday));
-		}
-
-		return response()->json($eagerHoliday, 200);
+		return response()->json(
+			$this->findAllHolidaysWithParticipants()[0],
+			200
+		);
 	}
 
 	public function store(Request $request)
@@ -108,6 +106,31 @@ class HolidayService implements IHolidayService
 		);
 	}
 
+	public function exportPdf()
+	{
+		$data = [
+			'content' => $this->findAllHolidaysWithParticipants()[0],
+		];
+
+		$htmlContent = View::make('holidayPdf', $data)->render();
+
+		$pdf = Pdf::loadHTML($htmlContent);
+
+		return $pdf->stream('document.pdf');
+	}
+
+	private function findAllHolidaysWithParticipants()
+	{
+		$eagerHoliday = [];
+		$holidays[] = Holiday::all();
+
+		foreach ($holidays as $holiday) {
+			array_push($eagerHoliday, Holiday::with('participants')->find($holiday));
+		}
+
+		return $eagerHoliday;
+	}
+
 	private function validateData(Request $request)
 	{
 		$validateData = [];
@@ -129,9 +152,5 @@ class HolidayService implements IHolidayService
 		}
 
 		return $validateData;
-	}
-
-	public function exportPdf(){
-
 	}
 }

@@ -41,4 +41,8 @@ class HolidayController extends Controller
 	{
 		return $this->service->destroy($id);
 	}
+
+	public function exportPdf() {
+		return $this->service->exportPdf();
+	}
 }

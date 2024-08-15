@@ -19,3 +19,5 @@ Route::post('/holiday', [HolidayController::class, 'store']);
 Route::put($PATH_WITH_ID, [HolidayController::class, 'update']);
 
 Route::delete($PATH_WITH_ID, [HolidayController::class, 'destroy']);
+
+Route::post('/holiday/pdf', [HolidayController::class, 'exportPdf']);
