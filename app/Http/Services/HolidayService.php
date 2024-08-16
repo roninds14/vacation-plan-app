@@ -15,7 +15,7 @@ class HolidayService implements IHolidayService
 	public function index()
 	{
 		return response()->json(
-			$this->findAllHolidaysWithParticipants()[0],
+			$this->findAllHolidaysWithParticipants(),
 			200
 		);
 	}
@@ -126,7 +126,7 @@ class HolidayService implements IHolidayService
 	public function exportPdf()
 	{
 		$data = [
-			'content' => $this->findAllHolidaysWithParticipants()[0],
+			'content' => $this->findAllHolidaysWithParticipants(),
 		];
 
 		$htmlContent = View::make('holidayPdf', $data)->render();
