@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "6ab908f9-3672-44ac-96d1-6b6c8c6932de",
+		"name": "VacationPlan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15732565",
+		"_collection_link": "https://roninds14.postman.co/workspace/Team-Workspace~76f7210b-ed37-4249-8412-9109d4b79038/collection/15732565-6ab908f9-3672-44ac-96d1-6b6c8c6932de?action=share&source=collection_link&creator=15732565"
+	},
+	"item": [
+		{
+			"name": "getAllHoliday",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/holiday",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"holiday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getHoliday",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{localhost}}/holiday/16",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"holiday",
+						"16"
+					],
+					"query": [
+						{
+							"key": "Accept",
+							"value": "application/json",
+							"disabled": true
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzY5ZDQwMzE5ZTY1NTI5YzkxMmU5YTdkYzUxMTRiMjJmOGNiNDBjZmVlYWEyZjJiZTJjY2JhMWJjNTUzMTg3M2Y0Zjk5MjJmM2Q3NjczODAiLCJpYXQiOjE3MjM3NzkzNzYuNTk2NDIsIm5iZiI6MTcyMzc3OTM3Ni41OTY0MjIsImV4cCI6MTc1NTMxNTM3Ni41ODg4NzgsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.wyg8wfdozVR1Ug17OFGu6UWElDGKppUyisWGm_sKFEPXIYtLTszyhtVItQknJQxYKS5SuTKwd9Fkts9Y6naQ9GHpm8JJkXsF6SgjL4CPFv8dLcLdeGfKM6x9yeajt8GsYdcL98grpbrvD2NQycRLmzy4k9F3fRPpxnOAmZvHnPIJk-IBsknXo6sh3lbSQrAF0K48Hz1uYKYJqE7NFTyol91I4N_0OPeRWVAmqcsgTgWtHD9JkQrfbrkYp4vLg7GMUq0OwTraSG5zBVEY_Ydwos7Raoj2WPlCtgz7NdqVo5QcV6HCVablQ0qR34bzBqbFU1fG-GqvZDRdL5DnVTKyMkiGU2HXozRiLJBsJKniDDoRpOJ4D5iepLFsqlutRExFU4ZTFrvjxvAo00YqvVG71OA8H0Fat8sNYlsX5Bw6IWUnfx3KkjuJ7ojrMpJDvXo9OQBhoM_1xCOwwMB9Jr2IkzQZglJC-Yu9-lHXGYpMrAzqGCX7ZY3b9iJ694W9kCJ72w4qU8mvAEsZoJdxg-3KY6RAWE0fD_de4hqb6c2tEKcZXum3gzeq6kbuNBNgYWFIv8x-6luU2zGNRXFfSoMsNXJW3yVqfMSfxSMCzUVkRT-2LIGTp2UMz_QZ6H6OvlYn5dLLCFJ5voQwmF4rhAtAd4WDVMYDedVOMvfDxKfj1QQ",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insertHoliday",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"dummyTitle\",\r\n    \"description\": \"Lorem iupsum\",\r\n    \"date\":  \"2024-08-31\",\r\n    \"location\": \"dummyLocation\",\r\n    \"participants\": [\r\n        {\r\n            \"name\" : \"Participants 01\"\r\n        },\r\n        {\r\n            \"name\" : \"Participants 02\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/holiday",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"holiday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exportPdf",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/holiday/pdf",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"holiday",
+						"pdf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateHoliday",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"dummyTitle 3\",\r\n    \"description\": \"Lorem iupsum 2\",\r\n    \"date\":  \"2024-08-31\",\r\n    \"location\": \"dummyLocation 2\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/holiday/16",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"holiday",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletHoliday",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/holiday/16",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"holiday",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"roni\",\r\n    \"email\": \"roni@email.com\",\r\n    \"password\": \"123456\",\r\n    \"password_confirmation\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/register",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var token = jsonData.token;\r",
+							"\r",
+							"    pm.environment.set(\"authToken\", token);\r",
+							"    \r",
+							"    console.log(\"Token armazenado com sucesso.\");\r",
+							"} else {\r",
+							"    console.log(\"Falha na autenticação.\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"roni@email.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/login",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
