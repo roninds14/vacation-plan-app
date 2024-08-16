@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\TokenGuard;
 use Exception;
 
 class Authentication  extends Controller
@@ -24,13 +23,6 @@ class Authentication  extends Controller
 			"password" => $validatedData['password']
 		])){
 			$user = Auth::user();
-
-			$config = [
-				'driver' => 'token',
-				'model' => User::class,
-				'provider' => 'users',
-				'hash' => true,
-			];
 
 			$token = $user->createToken('Personal Access Token')->accessToken;
 

@@ -7,6 +7,7 @@ use App\Models\Participant;
 use Exception;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class HolidayService implements IHolidayService
@@ -43,7 +44,10 @@ class HolidayService implements IHolidayService
 
 	public function show(string $id)
 	{
-		$holiday = Holiday::with('participants')->find($id);
+		$holiday = Holiday::with('participants')
+			->where('user_id', Auth::user()->id)
+			->where('id', $id)
+			->get();
 
 		return response()->json($holiday, $holiday !== null ? 200 : 204);
 	}
@@ -56,7 +60,10 @@ class HolidayService implements IHolidayService
 			return response()->json($validatedData, 422);
 		}
 
-		$holiday = Holiday::with('participants')->find($id);
+		$holiday = Holiday::with('participants')
+			->where('user_id', Auth::user()->id)
+			->where('id', $id)
+			->first();
 
 		if ($holiday === null) {
 			return response()->json('No Content', 204);
@@ -97,7 +104,17 @@ class HolidayService implements IHolidayService
 
 	public function destroy(string $id)
 	{
-		$holiday['deleted'] = Holiday::with('participants')->find($id);
+		$deleted = Holiday::with('participants')
+			->where('user_id', Auth::user()->id)
+			->where('id', $id)
+			->first();
+
+		if ($deleted === null) {
+			return response()->json('No Content', 204);
+		}
+
+		$holiday['deleted'] = $deleted;
+
 		$result = Holiday::destroy($id);
 
 		return response()->json(
@@ -122,7 +139,7 @@ class HolidayService implements IHolidayService
 	private function findAllHolidaysWithParticipants()
 	{
 		$eagerHoliday = [];
-		$holidays[] = Holiday::all();
+		$holidays = Holiday::where('user_id', Auth::user()->id)->get();
 
 		foreach ($holidays as $holiday) {
 			array_push($eagerHoliday, Holiday::with('participants')->find($holiday));
@@ -144,6 +161,8 @@ class HolidayService implements IHolidayService
 				'participants' => 'nullable|array',
 				'participants.*.name' => 'required|string|max:255',
 			]);
+
+			$validateData['user_id'] = Auth::user()->id;
 		} catch (Exception $e) {
 			$validateData = [
 				'error' => "Validation failed. {$e->getMessage()}",
