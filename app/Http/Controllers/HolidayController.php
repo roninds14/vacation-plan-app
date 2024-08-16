@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\IHolidayService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HolidayController extends Controller
