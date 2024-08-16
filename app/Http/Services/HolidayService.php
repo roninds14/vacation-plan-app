@@ -37,7 +37,7 @@ class HolidayService implements IHolidayService
 		}
 
 		return response()->json(
-			Holiday::with('participants')->find($holiday['id']),
+			Holiday::with('participants')->find($holiday->id),
 			201
 		);
 	}

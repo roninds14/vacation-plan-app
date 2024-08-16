@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 
-class AuthService implements IAuthService {
+class AuthService implements IAuthService
+{
 	public function login(Request $request)
 	{
 		$validatedData = $this->validateLoginData($request);
@@ -17,10 +18,10 @@ class AuthService implements IAuthService {
 			return response()->json($validatedData, 422);
 		}
 
-		if(Auth::attempt([
+		if (Auth::attempt([
 			"email" => $validatedData['email'],
 			"password" => $validatedData['password']
-		])){
+		])) {
 			$user = Auth::user();
 
 			$token = $user->createToken('Personal Access Token')->accessToken;
@@ -30,8 +31,7 @@ class AuthService implements IAuthService {
 				"message" => "User logged successfully",
 				"token" => $token
 			]);
-		}
-		else {
+		} else {
 			return response()->json([
 				"status" => false,
 				"message" => "Invalid loging details"
