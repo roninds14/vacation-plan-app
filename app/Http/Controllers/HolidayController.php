@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\IHolidayService;
-use App\Models\Holiday;
-use App\Models\Participant;
-use Exception;
 use Illuminate\Http\Request;
 
 class HolidayController extends Controller
