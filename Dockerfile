@@ -12,6 +12,10 @@ RUN apt update && apt install -y \
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+RUN apt-get update && \
+    apt-get install -y libzip-dev unzip && \
+    docker-php-ext-install zip
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
