@@ -49,7 +49,7 @@ class HolidayService implements IHolidayService
 			->where('id', $id)
 			->get();
 
-		return response()->json($holiday, $holiday !== null ? 200 : 204);
+		return response()->json($holiday, count($holiday) ? 200 : 204);
 	}
 
 	public function update(Request $request, string $id)
