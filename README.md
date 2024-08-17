@@ -19,9 +19,9 @@ Prerequisites:
 
 6. Install Passport:
  - Run: `docker-compose exec app php artisan passport:install`
- -- You might see the error: 'ERROR Encryption keys already exist. Use the --force option to overwrite them'. Don’t worry.
- -- When asked, "Would you like to run all pending database migrations?" answer yes.
- -- When asked, "Would you like to create the 'personal access' and 'password grant' clients?" answer yes.
+ - You might see the error: 'ERROR Encryption keys already exist. Use the --force option to overwrite them'. Don’t worry.
+ - When asked, "Would you like to run all pending database migrations?" answer yes.
+ - When asked, "Would you like to create the 'personal access' and 'password grant' clients?" answer yes.
 
 7. Done! Now you can run the project easily.
 
