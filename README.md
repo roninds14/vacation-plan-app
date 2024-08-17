@@ -35,6 +35,16 @@
 
 # API Endpoints
 
+### Headers Parameters Documentation
+
+1. Accept: application/json
+   - The Accept header indicates that the client expects the server's response to be in JSON format. This is a common header in API requests where the client needs structured data that can be easily parsed.
+   - `Accept: application/json`
+
+2. Authorization: Bearer {{authToken}}
+   - The Authorization header is used to pass authentication credentials to the server. The Bearer scheme is typically used with OAuth 2.0 or JWT tokens, where {{authToken}} is a placeholder for the actual token that authenticates the client.
+   - `Authorization: Bearer <your-token-here>`
+
 ### Create a New Holiday Plan
 - Method: **POST**
 - URI: `/api/holiday`
@@ -56,13 +66,13 @@
  - Request Parameters:
    - title (String): The name or title of the holiday plan. This field is required.
      - Example: "Summer Vacation 2024"
-   - description (String): A detailed description of the holiday plan. This field is optional.
+   - description (String): A detailed description of the holiday plan. This field is required.
      - Example: "A week-long beach vacation with friends and family."
    - date (String): The date of the holiday in YYYY-MM-DD format. This field is required.
      - Example: "2024-08-20"
    - location (String): The location where the holiday will take place. This field is required.
      - Example: "Hawaii, USA"
-   - participants|***optional*** (Array of Objects): A list of participants attending the holiday. Each participant object must include a "name" field. This field is required.
+   - participants (Array of Objects): A list of participants attending the holiday. Each participant object must include a "name" field. This field is optional.
      - Example:
 ```
 [
@@ -76,6 +86,7 @@
 ```
 - Response:
   - **201 Created**: If the holiday plan is successfully created, the server will respond with a status code of 201 and return a JSON object with the details of the created holiday plan.
+  - **401 Unauthorized**: If the token is incorrect, the server will respond with a 401 status code and an error message.
   - **422 Unprocessable Entity**: If the request body is missing required fields or contains invalid data, the server will respond with a 422 status code and an error message.
   - **500 Internal Server Error**: If there's an issue on the server, it will respond with a 500 status code and an error message.
   - Example Response:
@@ -114,6 +125,7 @@
 - URI: `/api/holiday`
 - Response:
   - **200 Ok**: The server will respond with a status code of 200 and return a JSON object with the details of the created holiday plan.
+  - **401 Unauthorized**: If the token is incorrect, the server will respond with a 401 status code and an error message.
   - **500 Internal Server Error**: If there's an issue on the server, it will respond with a 500 status code and an error message.
   - Example Response:
 ```
@@ -159,6 +171,7 @@
 - Response:
   - **200 Ok**: The server will respond with a status code of 200 and return a JSON object with the details of the created holiday plan.
   - **204 No Content**: The server will respond with a status code of 204 case no content are found.
+  - **401 Unauthorized**: If the token is incorrect, the server will respond with a 401 status code and an error message.
   - **500 Internal Server Error**: If there's an issue on the server, it will respond with a 500 status code and an error message.
   - Example Response:
 ```
@@ -241,6 +254,7 @@
   - **201 Created**: If the holiday plan is successfully created, the server will respond with a status code of 201 and return a JSON object with the details of the created holiday plan.
   - **204 No Content**: The server will respond with a status code of 204 case no content are found.
   - **400 Bad Request**: Case is not possible update de data the serve will returna bad request.
+  - **401 Unauthorized**: If the token is incorrect, the server will respond with a 401 status code and an error message.
   - **422 Unprocessable Entity**: If the request body is missing required fields or contains invalid data, the server will respond with a 422 status code and an error message.
   - **500 Internal Server Error**: If there's an issue on the server, it will respond with a 500 status code and an error message.
   - Example Response:
@@ -282,6 +296,7 @@
 - Response:
   - **200 Ok**: The server will respond with a status code of 200 and return a JSON object with the details of the created holiday plan.
   - **204 No Content**: The server will respond with a status code of 204 case no content to deleted are found.
+  - **401 Unauthorized**: If the token is incorrect, the server will respond with a 401 status code and an error message.
   - **500 Internal Server Error**: If there's an issue on the server, it will respond with a 500 status code and an error message.
   - Example Response:
 ```
@@ -323,3 +338,92 @@
   - A PDF file with all holiday data will be returned
   - Example:
 ![alt text](https://github.com/roninds14/vacation-plan-app/blob/main/pdf-example.PNG?raw=true)
+
+## Authorization Endpoinds - The following endpoints do not need parameters in the header
+
+### User Registration
+- Method: **POST**
+- URI: `/api/register`
+- Request Body:
+  - The request should be sent in JSON format. Below is the structure of the request body:
+```
+{
+    "name": "roni",
+    "email": "roni@email.com",
+    "password": "123456",
+    "password_confirmation": "123456"
+}
+```
+ - Request Parameters:
+   - name (String): The name of the user registering for the account. This field is required.
+     - Example: "roni"
+   - email (String): The email address of the user. It must be unique and in a valid email format. This field is required.
+     - Example: "roni@email.com"
+   - password (String): The password for the user's account. It must meet the application's password policy (e.g., minimum length, complexity). This field is required.
+     - Example: "123456"
+   - password_confirmation (String): This field should match the password field exactly, ensuring that the user has correctly typed their desired password. This field is required.
+     - Example: "123456"
+
+- Response:
+  - **200 Ok**: If the registration is successful, the server will respond with a status code of 200 and return a JSON object.
+    - Example Response:
+```
+{
+    "status": 1,
+    "message": "User created successfully"
+}
+```
+  - **401 Unauthorized**: If the token is incorrect, the server will respond with a 401 status code and an error message.
+  - **422 Unprocessable Content**: If the request body is missing required fields or contains invalid data, the server will respond with a 422 status code and an error message.
+    - Example Response:
+```
+{
+    "error": "Validation failed. The email has already been taken.",
+    "data": {
+        "name": "roni",
+        "email": "roni@email.com",
+        "password": "123456",
+        "password_confirmation": "123456"
+    }
+}
+```
+  - **500 Internal Server Error**: If there's an issue on the server, it will respond with a 500 status code and an error message.
+
+  - Notes:
+    - Ensure that the password and password_confirmation fields match exactly.
+    - The email field must be unique; otherwise, the registration will fail with a conflict error.
+
+### User Login
+
+- Method: POST
+- URI: `/api/login`
+- Request Body:
+  - The request must be sent in JSON format. Below is the structure of the request body:
+```
+{
+    "email": "roni@email.com",
+    "password": "123456"
+}
+```
+- Request Parameters:
+  - email (String): The email address of the user trying to log in. This field is required.
+    - Example: "roni@email.com"
+  - password (String): The password associated with the user's account. This field is required.
+    - Example: "123456"
+- Response:
+  - **200 OK**: If the login is successful, the server will respond with a status code of 200 and return a JSON object containing the user's authentication token and possibly other user details.
+```
+{
+    "status": true,
+    "message": "User logged successfully",
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjRkYzM4ODA3YTViMjcwNmFiYTBiMDZhY2NjZjQxN2U0MTBhMzFhNGY2NDA1ZTQ2YmRmNjFlZjIyNjQzMGQzNDlkYWM4MmZiN2UzZGI2ZmQiLCJpYXQiOjE3MjM5MTI4MDEuNDY3NzQ0LCJuYmYiOjE3MjM5MTI4MDEuNDY3NzQ3LCJleHAiOjE3NTU0NDg4MDEuMzE5MDE2LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.NdZ7XZrZFtiIeGR6eCw2qrACCBxrpr1OCd0Fh4eJ6lcVbNal78Iox1iLzJntgXmxJ6A2SMtcXsEH3PNzNqJrtPKM_GNpOc_38MHgNS1ciDiVGPigav7i4xb935NsKbcoTRBE-9hxLw_z64wdzlcIdQsN2UbtYA8BoJCu4Jeftk21fQFrBU-SDAWFGK_WmQQMlaBUR9kbvxiQ_UTnQLhBdZIV3XqVrmJBDvhCBIVUBg5soEjJbP3KbeqGg6yH-X35vB5zt7Bkzyb7YWyVGFcM7x3cbDtHV6iDYT4oAv0AUqA3k0pEmI3ak1DI-mni_UyccSktNhGHyCOGcKPGk-rrE7Jah9GEMCn1c2WWRwOswqDhacMqgIRRg_NbrzzdXmh6Iv38CYxQZAyBcrr5SXx8pkY92XM7CtLpv2xA9HAGX3LCnAvLlDisWxIVA2BVFYP_94FiG_FZKewVWkB9EtR_E4M6kDjTWRfakmggNUuw1zangoZYR-icw40NqHG207ximUyvx7UJ1sUnHm1DIpx1XFLsD65hCAZk0UfK7i_zP9j6K94wOUIrv7KC0eavRWGpinpEHuD-BIxlgqn9m8elGlm80tGbtoWRHMYtrwy_BFYsEEbMA6YTk3Nl37PGarXgaqE-vmqqvUus7zm6rwINPGuV-LkkFjGzI0WbLsQrcW4"
+}
+```
+or
+```
+{
+    "status": false,
+    "message": "Invalid loging details"
+}
+```
+  - **500 Internal Server Error**: If there's an issue on the server, it will respond with a 500 status code and an error message.
