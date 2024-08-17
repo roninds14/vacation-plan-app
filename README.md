@@ -1,6 +1,6 @@
 # Content
-## Installation
-## API Endpoints
+  1. Installation
+  2. API Endpoints
 
 # Installation:
 
