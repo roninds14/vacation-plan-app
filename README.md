@@ -37,6 +37,9 @@
 
 10. To shut down, run: `docker-compose down -v`
 
+### Instaltion Video
+[![Watch the video]()](https://youtu.be/ASa2jUtyyOs)
+
 # API Endpoints
 
 ### Headers Parameters Documentation
