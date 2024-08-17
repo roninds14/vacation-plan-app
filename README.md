@@ -27,8 +27,8 @@
 
 ### Optional:
 9. To make your life easier, import the Collection and Environment of the project into Postman. The files are in the main project folder:
- - Collection: **'VacationPlan.postman_collection.json'**
- - Environment: **'VacationPlanEnvironment.postman_environment'**
- - PS: Don’t forget to activate the environment.
+   - Collection: **'VacationPlan.postman_collection.json'**
+   - Environment: **'VacationPlanEnvironment.postman_environment'**
+     - PS: Don’t forget to activate the environment.
 
 10. To shut down, run: `docker-compose down -v`
