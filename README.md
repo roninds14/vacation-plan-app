@@ -38,7 +38,7 @@
 10. To shut down, run: `docker-compose down -v`
 
 ### Instaltion Video
-[![Watch the video]()](https://youtu.be/ASa2jUtyyOs)
+[![Watch the video](https://github.com/roninds14/vacation-plan-app/blob/main/youtube-logotype.jpg?raw=true)](https://youtu.be/ASa2jUtyyOs)
 
 # API Endpoints
 
