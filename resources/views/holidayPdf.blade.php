@@ -61,13 +61,13 @@
 		<tbody>
 			@foreach ($content as $holiday)
 			<tr>
-				<td>{{ $holiday[0]->title }}</td>
-				<td>{{ $holiday[0]->description }}</td>
-				<td>{{ $holiday[0]->date }}</td>
-				<td>{{ $holiday[0]->location }}</td>
+				<td>{{ $holiday['title'] }}</td>
+				<td>{{ $holiday['description'] }}</td>
+				<td>{{ $holiday['date'] }}</td>
+				<td>{{ $holiday['location'] }}</td>
 				<td>
-					@if(count($holiday[0]->participants))
-					{{ $holiday[0]->participants->pluck('name')->implode(', ') }}
+					@if(count($holiday['participants']))
+					{{ $holiday['participants']->pluck('name')->implode(', ') }}
 					@else
 					-
 					@endif

@@ -138,14 +138,9 @@ class HolidayService implements IHolidayService
 
 	private function findAllHolidaysWithParticipants()
 	{
-		$eagerHoliday = [];
-		$holidays = Holiday::where('user_id', Auth::user()->id)->get();
-
-		foreach ($holidays as $holiday) {
-			array_push($eagerHoliday, Holiday::with('participants')->find($holiday));
-		}
-
-		return $eagerHoliday;
+		return Holiday::where('user_id', Auth::user()->id)
+			->with('participants')
+			->get();
 	}
 
 	private function validateData(Request $request)

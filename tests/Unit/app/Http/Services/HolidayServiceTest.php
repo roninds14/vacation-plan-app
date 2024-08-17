@@ -30,11 +30,8 @@ class HolidayServiceTest extends TestCase
 		];
 
 		$mockHoliday = Mockery::mock('alias:' . Holiday::class);
-		$mockHoliday->shouldReceive('where->get')
+		$mockHoliday->shouldReceive('where->with->get')
 			->once()
-			->andReturn($dbReturn);
-
-		$mockHoliday->shouldReceive('with->find')
 			->andReturn($dbReturn);
 
 		$holidayService = new HolidayService();
@@ -176,7 +173,7 @@ class HolidayServiceTest extends TestCase
 	{
 		//Arrange
 		$mockHoliday = Mockery::mock('alias:' . Holiday::class);
-		$mockHoliday->shouldReceive('where->get')
+		$mockHoliday->shouldReceive('where->with->get')
 			->once()
 			->andReturn($mockHoliday);
 
