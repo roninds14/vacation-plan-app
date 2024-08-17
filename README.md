@@ -322,4 +322,4 @@
 - Response:
   - A PDF file with all holiday data will be returned
   - Example:
-  
+![alt text](https://github.com/roninds14/vacation-plan-app/blob/main/pdf-example.PNG?raw=true)
