@@ -37,7 +37,7 @@
 
 10. To shut down, run: `docker-compose down -v`
 
-### Instaltion Video
+### Instalation Video
 [![Watch the video](https://github.com/roninds14/vacation-plan-app/blob/main/youtube-logotype.jpg?raw=true)](https://youtu.be/ASa2jUtyyOs)
 
 # API Endpoints
@@ -434,3 +434,7 @@ or
 }
 ```
   - **500 Internal Server Error**: If there's an issue on the server, it will respond with a 500 status code and an error message.
+
+
+### Running Video
+[![Watch the video](https://github.com/roninds14/vacation-plan-app/blob/main/youtube-logotype.jpg?raw=true)](https://youtu.be/BY4NlD31LUI)
