@@ -13,6 +13,7 @@ return new class extends Migration {
 			$table->text('description')->nullable();
 			$table->date('date');
 			$table->string('location')->nullable();
+			$table->bigInteger('user_id');
 			$table->timestamps();
 		});
 

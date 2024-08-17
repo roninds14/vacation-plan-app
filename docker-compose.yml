@@ -11,6 +11,8 @@ services:
     container_name: app-container
     restart: unless-stopped
     working_dir: /var/www/
+    depends_on:
+      - db
     volumes:
       - ./:/var/www
     networks:
@@ -18,14 +20,12 @@ services:
 
   db:
     image : mysql
-    container_name : mysql
-    volumes:
-      - ./mysql/data:/var/lib/mysql
+    container_name : mysql-container
+   
     ports:
-      - "3306:3306"
+      - "3309:3309"
     environment:
             - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_USER=${DB_USERNAME}
             - MYSQL_PASSWORD=${DB_PASSWORD}
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     networks:
