@@ -64,13 +64,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{localhost}}/holiday/16",
+					"raw": "{{localhost}}/holiday/1",
 					"host": [
 						"{{localhost}}"
 					],
 					"path": [
 						"holiday",
-						"16"
+						"1"
 					],
 					"query": [
 						{
@@ -151,11 +151,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{localhost}}/holiday/pdf",
+					"raw": "http://localhost:8000/api/holiday/pdf",
+					"protocol": "http",
 					"host": [
-						"{{localhost}}"
+						"localhost"
 					],
+					"port": "8000",
 					"path": [
+						"api",
 						"holiday",
 						"pdf"
 					]
@@ -181,7 +184,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"dummyTitle 3\",\r\n    \"description\": \"Lorem iupsum 2\",\r\n    \"date\":  \"2024-08-31\",\r\n    \"location\": \"dummyLocation 2\"\r\n\r\n}",
+					"raw": "{\r\n    \"title\": \"dummyTitle\",\r\n    \"description\": \"Lorem iupsum\",\r\n    \"date\":  \"2024-08-31\",\r\n    \"location\": \"dummyLocation\",\r\n    \"participants\": [\r\n        {\r\n            \"name\" : \"Participants 03\"\r\n        },\r\n        {\r\n            \"name\" : \"Participants 04\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -189,13 +192,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{localhost}}/holiday/16",
+					"raw": "{{localhost}}/holiday/1",
 					"host": [
 						"{{localhost}}"
 					],
 					"path": [
 						"holiday",
-						"16"
+						"1"
 					]
 				}
 			},
@@ -227,13 +230,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{localhost}}/holiday/16",
+					"raw": "{{localhost}}/holiday/4",
 					"host": [
 						"{{localhost}}"
 					],
 					"path": [
 						"holiday",
-						"16"
+						"4"
 					]
 				}
 			},
